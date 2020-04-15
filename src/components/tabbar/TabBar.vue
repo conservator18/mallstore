@@ -9,13 +9,23 @@
 </template>
 
 <script>
-const obj = {
-      active: 0
-    }
 export default {
   name: "TabBar",
+  props: {
+    index: {
+      type: Number,
+      default(){
+        return 0
+      }
+    }
+  },
   data() {
-    return obj;
+    return {
+      active: 0
+    };
+  },
+  created(){
+    this.active = this.index;
   }
 };
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant';
+import router from '../router'
 
 export function request(config) {
   return new Promise((resolve, reject) => {
@@ -9,6 +10,7 @@ export function request(config) {
     })
 
     instance.interceptors.request.use(config => {
+      config.headers.Authorization = sessionStorage.getItem('token')
       Toast.loading({
         message: '加载中...',
         forbidClick: true, //加载中背景不允许操作
@@ -19,6 +21,9 @@ export function request(config) {
 
     instance.interceptors.response.use(data => {
       Toast.clear();
+      if(data.data.errcode == '90101') {
+        router.push('/login')
+      }
       return data
     })
 

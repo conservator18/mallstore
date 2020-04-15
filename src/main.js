@@ -13,6 +13,18 @@ Vue.config.productionTip = false
 Vue.prototype.request = request
 Vue.prototype.url = url;
 
+if(sessionStorage.getItem('token')){
+  request({
+    url: url.userInfo,
+    method: 'get'
+  }).then(res => {
+    //将当前登录对象存放到store里面的user中
+    store.commit('assignUser', res.data.data)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
 
 new Vue({
   router,

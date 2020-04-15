@@ -7,7 +7,7 @@
     <!-- 返回顶部 -->
     <home-back v-show="isShowBack" @click.native="goBack"></home-back>
     <!-- 底部导航栏 -->
-    <tab-bar></tab-bar>
+    <tab-bar :index='0'></tab-bar>
   </div>
 </template>
 
@@ -54,16 +54,6 @@ export default {
         ? (this.isShowBack = true)
         : (this.isShowBack = false);
 
-      //没有数据了
-      if (this.page >= this.totalPage) {
-        this.$toast({
-          message: "没有更多数据了",
-          duration: 1000
-          //   forbidClick: true
-        });
-        return;
-      }
-
       //是否请求下一页的数据
       if (this.isAddPage) {
         return;
@@ -73,6 +63,15 @@ export default {
         mainDom.clientHeight + mainDom.scrollTop >=
         mainDom.scrollHeight - 1
       ) {
+        //没有数据了
+        if (this.page >= this.totalPage) {
+          this.$toast({
+            message: "没有更多数据了",
+            duration: 1000
+            //   forbidClick: true
+          });
+          return;
+        }
         this.page++;
         this.getProduct(this.page);
       }

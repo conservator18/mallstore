@@ -7,11 +7,17 @@ const Home = () => import('../views/home/Home')
 const Cart = () => import('../views/cart/Cart')
 const User = () => import('../views/user/User')
 const Product = () => import('../views/product/Product')
+const Login = () => import('../views/login/Login')
 
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
+    {
+      path: '/login',
+      component: Login,
+      name: 'Login'
+    },
     {
       path: '/product',
       component: Product,
@@ -25,7 +31,10 @@ const router = new VueRouter({
     {
       path: '/cart',
       component: Cart,
-      name: 'Cart'
+      name: 'Cart',
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/user',
@@ -37,6 +46,20 @@ const router = new VueRouter({
       redirect: '/home'
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth) {
+    if (sessionStorage.getItem('token')) {
+      next();
+    } else {
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

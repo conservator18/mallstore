@@ -12,7 +12,7 @@
       <product-tab-bar :productInfoList="productInfoList"></product-tab-bar>
     </div>
     <!-- 商品导航 -->
-    <product-bottom-bar></product-bottom-bar>
+    <product-bottom-bar :productInfoList="productInfoList"></product-bottom-bar>
   </div>
 </template>
 
