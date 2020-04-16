@@ -8,11 +8,29 @@ const Cart = () => import('../views/cart/Cart')
 const User = () => import('../views/user/User')
 const Product = () => import('../views/product/Product')
 const Login = () => import('../views/login/Login')
+const OrderConfirm = () => import('../views/orderconfirm/OrderConfirm')
+const AddressList = () => import('../views/addresslist/AddressList')
+const AddressEdit = () => import('../views/addressedit/AddressEdit')
 
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
+    {
+      path: '/addressedit',
+      component: AddressEdit,
+      name: 'AddressEdit'
+    },
+    {
+      path: '/addresslist',
+      component: AddressList,
+      name: 'AddressList'
+    },
+    {
+      path: '/orderconfirm',
+      component: OrderConfirm,
+      name: 'OrderConfirm'
+    },
     {
       path: '/login',
       component: Login,

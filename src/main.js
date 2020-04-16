@@ -25,6 +25,14 @@ if(sessionStorage.getItem('token')){
   })
 }
 
+//获取地址信息
+request({
+  url: url.area,
+  method: 'get'
+}).then(res => {
+  store.commit('getAreaList', res.data.data);
+})
+
 
 new Vue({
   router,

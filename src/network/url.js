@@ -8,5 +8,8 @@ export default {
     cart: '/cart/all',                  //获取购物车
     addone: '/cart/update',             //单个商品更新购物车（加入购物车）
     delet: '/cart/delete',              //删除购物车商品
-    
+    area: '/data/area',                 //获取带地区编码的省份城市区县列表
+    updateAddr: '/user_address/update', //修改用户收货地址
+    addAddr: '/user_address/create',    //新增用户收货地址
+    deleteAddr: '/user_address/delete', //删除用户收货地址
 }

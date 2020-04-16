@@ -7,9 +7,9 @@
         text="收藏"
         @click="onClickLike"
       />
-      <van-goods-action-icon icon="cart-o" text="购物车" />
+      <van-goods-action-icon icon="cart-o" text="购物车" @click='$router.push("/cart")' />
       <van-goods-action-button type="warning" text="加入购物车" @click='addCart' />
-      <van-goods-action-button type="danger" text="立即购买" />
+      <van-goods-action-button type="danger" text="立即购买" @click='buy' />
     </van-goods-action>
   </div>
 </template>
@@ -41,6 +41,18 @@ export default {
     this.productId = this.$route.query.id;
   },
   methods: {
+    //立即购买
+    buy(){
+      let obj = {
+        id: this.productId,
+        cover: this.productInfoList.cover,
+        name: this.productInfoList.name,
+        price: this.productInfoList.price,
+        count: 1
+      }
+      sessionStorage.setItem('buyList', JSON.stringify([obj]))
+      this.$router.push('/orderconfirm')
+    },
     //添加到购物车
     addCart(){
       this.request({

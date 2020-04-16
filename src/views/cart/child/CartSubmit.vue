@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-submit-bar :price="totalPrice" button-text="结算">
+    <van-submit-bar :price="totalPrice" button-text="结算" @submit='submit'>
       <template #default>共{{totalCount}}件</template>
     </van-submit-bar>
   </div>
@@ -19,6 +19,18 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    submit(){
+      let obj = []
+      this.cartList.forEach(item => {
+        if(item.checked) {
+          obj.push(item)
+        }
+      })
+      sessionStorage.setItem('buyList', JSON.stringify(obj));
+      this.$router.push('/orderconfirm');
+    }
   },
   computed: {
     //总数量
